@@ -1,14 +1,12 @@
-class Article < ApplicationRecord
+class Comment < ApplicationRecord
   VALID_STATUSES = ['public', 'private', 'archived']
   
-  has_many :comments
-  
-  validates :title, presence: true
-  validates :body, presence: true, length: { minimum: 10 }
+  belongs_to :article
+
   validates :status, inclusion: { in: VALID_STATUSES }
 
   def archived?
     status == 'archived'
   end
-  
+
 end
